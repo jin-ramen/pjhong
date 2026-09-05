@@ -1,26 +1,49 @@
-import { useQuery } from '@tanstack/react-query';
-import './App.css'
-import { useState } from 'react';
-import createMessage from './queries/useMessage';
+import React, { Suspense, useState } from 'react';
+import MessageCard from './components/MessageCard';
 
-function App() {  
-  const [name, setName] = useState("Yuna Yeo Pei Wei");
-  const [from, setFrom] = useState("Pei Wei")
-
-  const { data, error } = useQuery(createMessage(name, from))
-
-  if (error) return (
-    alert("Something wong") 
-  )
-
-  return (
-    <>
-      <h1>{data?.message}</h1>
-      <p>{data?.subtitle}</p>
-    </>
-  )
+type Params = {
+  name: string;
+  from: string;
 }
 
+function App() {  
+  const [draft, setDraft] = useState<Params>({ name: 'Jin', from: 'Pei' })
+  const [submitted, setSubmitted] = useState<Params | null>(null)
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    setSubmitted(draft);
+  }
+
+  return (
+    <main>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:{" "}
+          <input 
+            value={draft.name}
+            onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+          />
+        </label>
+
+        <label>
+          From: {" "}
+          <input 
+            value={draft.from}
+            onChange={(e) => setDraft({ ...draft, from: e.target.value })}
+          />
+        </label>
+
+        <button type="submit">Send</button>
+      </form>
+
+      {submitted && (
+        <Suspense fallback={<p>loading</p>}>
+          <MessageCard name={submitted.name} from={submitted.from} />
+        </Suspense>
+      )}
+    </main>
+  )
+}
 
 export default App
