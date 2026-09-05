@@ -1,2 +1,0 @@
-fn(axum::extract::Path<Target>) -> impl Future<Output = Json<models::Message>> {off}
-fn(axum::extract::Path<Target>) -> impl Future<Output = Json<models::Message>> {off}: Handler<_, _>
