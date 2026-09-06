@@ -13,3 +13,7 @@ pub struct Target {
 pub async fn off(Path(Target { name, from }): Path<Target>) -> Json<Message> {
     Json(Message::build(format!("Fuck off, {name}"), &from))
 }
+
+pub async fn back(Path(Target { name, from }): Path<Target>) -> Json<Message> {
+    Json(Message::build(format!("{name}, back the fuck off"), &from))
+}

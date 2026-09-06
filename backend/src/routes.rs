@@ -10,4 +10,5 @@ pub fn app() -> Router {
 fn api_routes() -> Router {
     Router::new()
         .route("/off/{name}/{from}", get(handlers::off))
+        .route("/back/{name}/{from}", get(handlers::back))
 }
