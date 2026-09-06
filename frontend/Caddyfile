@@ -1,0 +1,13 @@
+pjhong.com, www.pjhong.com {
+    encode gzip zstd
+    root * /srv
+
+    handle /api/* {
+        reverse_proxy api:3000
+    }
+
+    handle {
+        try_files {path} /index.html
+        file_server
+    }
+}
