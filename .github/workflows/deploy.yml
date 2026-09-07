@@ -6,6 +6,7 @@ on:
 
 jobs:
     build:
+        name: build ${{ matrix.label }}
         runs-on: ubuntu-24.04-arm 
         permissions:
             contents: read
@@ -15,8 +16,10 @@ jobs:
                 include:
                     - name: api
                       context: ./backend
+                      label: Rust Backend
                     - name: web
                       context: ./frontend
+                      label: React Frontend
         steps:
             - uses: actions/checkout@v4
             - uses: docker/setup-buildx-action@v3
