@@ -14,6 +14,7 @@ const getMessage = async (name: string, from: string): Promise<Message> => {
 export default function messageQuery(name: string, from: string) {
     return queryOptions({
         queryKey: ["off", name, from],
-        queryFn: () => getMessage(name, from)
+        queryFn: () => getMessage(name, from),
+        retry: false
     })
 }

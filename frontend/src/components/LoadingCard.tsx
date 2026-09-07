@@ -1,4 +1,4 @@
-export default function Loading() {
+export default function LoadingCard() {
   return (
     <div
       role="status"

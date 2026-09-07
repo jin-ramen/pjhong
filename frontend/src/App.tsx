@@ -1,6 +1,5 @@
-import React, { Suspense, useState } from 'react'
+import React, { useState } from 'react'
 import MessageCard from './components/MessageCard'
-import Loading from './components/Loading'
 import FormField from './components/FormField'
 import './index.css'
 
@@ -10,10 +9,10 @@ type Params = {
 }
 
 function App() {
-  const [draft, setDraft] = useState<Params>({ name: 'Jin', from: 'Pei' })
+  const [draft, setDraft] = useState<Params>({ name: '', from: '' })
   const [submitted, setSubmitted] = useState<Params | null>(null)
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitted(draft)
   }
@@ -38,13 +37,11 @@ function App() {
 
       <div className="relative flex min-h-[220px] w-full max-w-md items-center justify-center">
         {submitted ? (
-          <Suspense fallback={<Loading />}>
-            <MessageCard
-              key={`${submitted.name}-${submitted.from}`}
-              name={submitted.name}
-              from={submitted.from}
-            />
-          </Suspense>
+          <MessageCard
+            key={`${submitted.name}-${submitted.from}`}
+            name={submitted.name}
+            from={submitted.from}
+          />
         ) : (
           <p className="font-mono text-xs tracking-[0.3em] text-[#FCEE0A]/40">
             no transmission
