@@ -1,18 +1,16 @@
 services:
   api:
-    build: ./backend
+    image: ghrc.io/jin-ramen/pjhong-api:latest
     restart: unless-stopped
 
   web:
-    build: ./frontend
+    build: ghcr.io/jin-ramen/pjhong-web:latest
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - caddy_data:/data
-    depends_on:
-      - api
 
 volumes:
   caddy_data:
