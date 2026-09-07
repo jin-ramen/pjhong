@@ -1,1 +1,2 @@
-A [FOAAS-style](https://foaas.io) insult Rust/Axum backend, TypeScript/React frontend, and a full self-hosted deploy pipeline — Docker, Caddy, AWS EC2, and GitHub Actions CI/CD. UI design generated with Claude Code; backend, infrastructure, and pipeline written by hand.
+# Insult Generator
+A [FOAAS-style](https://foaas.io) inspired Rust/Axum backend, TypeScript/React frontend, and a full self-hosted deploy pipeline — Docker, Caddy, AWS EC2, and GitHub Actions CI/CD. UI design generated with Claude Code; backend, infrastructure, and pipeline written by hand.
