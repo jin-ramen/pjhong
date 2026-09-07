@@ -59,13 +59,13 @@ export default function ErrorCard({ error, onRetry }: Props) {
             <span className="text-[11px] tracking-widest text-[#FF003C]/50">
               code {error.name}
             </span>
-            {/* <button
+            <button
               type="button"
               onClick={onRetry}
               className="bg-[#FF003C] px-5 py-2 text-xs font-bold uppercase tracking-[0.25em] text-[#0D0D0D] transition-colors hover:bg-[#FCEE0A] focus-visible:bg-[#FCEE0A] focus-visible:outline-none [clip-path:var(--chamfer-sm)]"
             >
               Retry
-            </button> */}
+            </button>
           </footer>
         </div>
       </div>
