@@ -6,7 +6,7 @@ type Message = {
 };
 
 const getMessage = async (name: string, from: string): Promise<Message> => {
-  const response = await fetch(`api/off/${name}/${from}`);
+  const response = await fetch(`api/back/${name}/${from}`);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
 };
