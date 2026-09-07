@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
 
   web:
-    build: ghcr.io/jin-ramen/pjhong-web:latest
+    image: ghcr.io/jin-ramen/pjhong-web:latest
     restart: unless-stopped
     ports:
       - "80:80"
