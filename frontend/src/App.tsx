@@ -9,7 +9,7 @@ type Params = {
 }
 
 function App() {
-  const [draft, setDraft] = useState<Params>({ name: 'HONG', from: '' })
+  const [draft, setDraft] = useState<Params>({ name: 'HONG', from: 'David Martinez' })
   const [submitted, setSubmitted] = useState<Params | null>(null)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
