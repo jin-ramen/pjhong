@@ -6,15 +6,17 @@ import ErrorCard from './ErrorCard';
 type Props = { name: string; from: string }
 
 export default function MessageCard({ name, from }: Props) {
-  const { data, isLoading, isError, error, refetch } = useQuery(messageQuery(name, from))
+  const { data, isLoading, isError, isSuccess, error, refetch } = useQuery(messageQuery(name, from))
 
   if (isLoading) return (
     <LoadingCard />
   )
 
   if (isError) return (
-    <ErrorCard error={error} onRetry={() => refetch}/>
+    <ErrorCard error={error} onRetry={() => refetch} />
   )
+
+  if (!isSuccess || !data) return null;
 
   return (
     <article
