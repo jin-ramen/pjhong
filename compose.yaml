@@ -1,6 +1,6 @@
 services:
   api:
-    image: ghrc.io/jin-ramen/pjhong-api:latest
+    image: ghcr.io/jin-ramen/pjhong-api:latest
     restart: unless-stopped
 
   web:
