@@ -5,6 +5,20 @@
   --chamfer-lg: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
 }
 
+html,
+body {
+  background: #0D0D0D;
+  min-height: 100%;
+  overscroll-behavior: none;
+}
+
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
 @supports (appearance: base-select) {
   .cp-select,
   .cp-select::picker(select) {

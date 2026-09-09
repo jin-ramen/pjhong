@@ -24,6 +24,7 @@ pub enum Insult {
     BendyBus,
     Chainsaw,
     Cocksplat,
+    CornBread,
 }
 
 impl Insult {
@@ -59,6 +60,10 @@ impl Insult {
             },
             Insult::Cocksplat => Message {
                 message: format!("Fuck off {}, you worthless cocksplat.", target.name),
+                subtitle: format!("- {}", target.from),
+            },
+            Insult::CornBread => Message {
+                message: format!("What in the cornbread fuck, {}", target.name),
                 subtitle: format!("- {}", target.from),
             },
         }

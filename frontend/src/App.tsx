@@ -20,7 +20,10 @@ function App() {
   }
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center gap-10 overflow-hidden bg-[#0D0D0D] px-6 py-12">
+    <main className="
+      relative flex min-h-screen flex-col items-center justify-center gap-10 overflow-hidden bg-[#0D0D0D] px-6 py-12
+      py-[max(3rem,env(safe-area-inset-top))] pb-[max(3rem,env(safe-area-inset-bottom))]
+    ">
       {/* Background grid */}
       <div
         aria-hidden
