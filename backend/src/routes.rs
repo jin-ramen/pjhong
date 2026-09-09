@@ -9,6 +9,6 @@ pub fn app() -> Router {
 
 fn api_routes() -> Router {
     Router::new()
-        .route("/off/{name}/{from}", get(handlers::off))
-        .route("/back/{name}/{from}", get(handlers::back))
+        .route("/insults/{insult}/{name}/{from}", get(handlers::get_insult))
+        .route("/insults", get(handlers::get_insults))
 }

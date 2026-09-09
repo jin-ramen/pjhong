@@ -1,19 +1,17 @@
-use axum::Json;
-use axum::extract::Path;
-use serde::Deserialize;
+use axum::{extract::Path, Json};
+use strum::VariantArray;
 
-use crate::models::Message;
+use crate::insults::{Insult, Target, Message};
 
-#[derive(Deserialize)]
-pub struct Target {
-    name: String,
-    from: String,
+pub async fn get_insult(
+    Path((insult, name, from)): Path<(String, String, String)>
+) -> Json<Message> {
+    let insult: Insult = insult.parse().unwrap();
+    let target: Target = Target { name, from };
+    let message: Message = insult.get_insult(&target);
+    return Json(message);
 }
 
-pub async fn off(Path(Target { name, from }): Path<Target>) -> Json<Message> {
-    Json(Message::build(format!("%@#$ off, {name}"), &from))
-}
-
-pub async fn back(Path(Target { name, from }): Path<Target>) -> Json<Message> {
-    Json(Message::build(format!("{name}, back the %@#$ off"), &from))
+pub async fn get_insults() -> Json<&'static [Insult]> {
+    Json(Insult::VARIANTS)
 }
