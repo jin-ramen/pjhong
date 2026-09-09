@@ -1,13 +1,12 @@
-use axum::{extract::Path, Json};
+use axum::{Json, extract::{Path, Query}};
 use strum::VariantArray;
 
 use crate::insults::{Insult, Target, Message};
 
 pub async fn get_insult(
-    Path((insult, name, from)): Path<(String, String, String)>
+    Path(insult): Path<Insult>,
+    Query(target): Query<Target>,
 ) -> Json<Message> {
-    let insult: Insult = insult.parse().unwrap();
-    let target: Target = Target { name, from };
     let message: Message = insult.get_insult(&target);
     return Json(message);
 }

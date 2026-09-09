@@ -6,7 +6,7 @@ type Message = {
 };
 
 const getMessage = async (insult: string, name: string, from: string): Promise<Message> => {
-  const response = await fetch(`api/insult/${insult}/${name}/${from}`);
+  const response = await fetch(`api/insult/${insult}?name=${name}&from=${from}`);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
 };

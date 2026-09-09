@@ -1,5 +1,4 @@
-use std::str::FromStr;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use strum_macros::VariantArray;
 
 #[derive(Serialize)]
@@ -8,34 +7,23 @@ pub struct Message {
     pub subtitle: String,
 }
 
+#[derive(Deserialize)]
 pub struct Target {
     pub name: String,
     pub from: String,
 }
 
-#[derive(VariantArray, Serialize)]
+#[derive(VariantArray, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Insult {
     Classic,
     BackOff,
     HappyBirthday,
     Blackadder,
-}
-
-#[derive(Debug)]
-pub struct ParseInsultError;
-
-impl FromStr for Insult {
-    type Err = ParseInsultError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s.to_lowercase().as_str() {
-            "classic" => Ok(Insult::Classic),
-            "backoff" => Ok(Insult::BackOff),
-            "happybirthday" => Ok(Insult::HappyBirthday),
-            "blackadder" => Ok(Insult::Blackadder),
-            _ => Err(ParseInsultError),
-        }
-    }
+    BravoMike,
+    BendyBus,
+    Chainsaw,
+    Cocksplat,
 }
 
 impl Insult {
@@ -56,7 +44,23 @@ impl Insult {
             Insult::Blackadder => Message{
                 message: format!("{}, your head is as empty as a eunuch's underpants. Fuck off!", target.name),
                 subtitle: format!("- {}", target.from),
-            }
+            },
+            Insult::BravoMike => Message {
+                message: format!("Bravo mike, {}", target.name),
+                subtitle: format!("- {}", target.from),
+            },
+            Insult::BendyBus => Message {
+                message: format!("Christ on a bendy-bus, {}, don't be such a fucking faff-arse.", target.name),
+                subtitle: format!("- {}", target.from),
+            },
+            Insult::Chainsaw => Message {
+                message: format!("Fuck me gently with a chainsaw, {}. Do I look like Mother Teresa?", target.name),
+                subtitle: format!("- {}", target.from),
+            },
+            Insult::Cocksplat => Message {
+                message: format!("Fuck off {}, you worthless cocksplat.", target.name),
+                subtitle: format!("- {}", target.from),
+            },
         }
     }
 }
