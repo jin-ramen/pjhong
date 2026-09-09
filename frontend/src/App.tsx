@@ -3,6 +3,7 @@ import MessageCard from './components/MessageCard'
 import FormField from './components/FormField'
 import './index.css'
 import SelectField from './components/SelectField';
+import DefaultCard from './components/DefaultCard';
 
 type Params = {
   insult: string,
@@ -11,7 +12,7 @@ type Params = {
 }
 
 function App() {
-  const [draft, setDraft] = useState<Params>({ insult: 'classic', name: 'HONG', from: 'David Martinez' })
+  const [draft, setDraft] = useState<Params>({ insult: 'classic', name: 'David Martinez', from: 'Hong' })
   const [submitted, setSubmitted] = useState<Params | null>(null)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +51,7 @@ function App() {
           />
         ) : (
           <p className="font-mono text-xs tracking-[0.3em] text-[#FCEE0A]/40">
-            no transmission
+            <DefaultCard />
           </p>
         )}
       </div>
