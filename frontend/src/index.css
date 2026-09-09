@@ -4,3 +4,56 @@
   --chamfer-sm: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   --chamfer-lg: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
 }
+
+@supports (appearance: base-select) {
+  .cp-select,
+  .cp-select::picker(select) {
+    appearance: base-select;
+  }
+
+  /* The open drawer */
+  .cp-select::picker(select) {
+    background: #0D0D0D;
+    border: 2px solid #00F0FF;
+    clip-path: var(--chamfer-sm);
+    padding: 4px 0;
+    margin-top: 4px;
+    font-family: ui-monospace, monospace;
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.25);
+  }
+
+  /* Options */
+  .cp-select option {
+    padding: 8px 12px;
+    color: #FCEE0A;
+    letter-spacing: 0.05em;
+    border-left: 2px solid transparent;
+  }
+  .cp-select option:hover,
+  .cp-select option:focus-visible {
+    background: #141400;
+    border-left-color: #00F0FF;
+    outline: none;
+  }
+  .cp-select option:checked {
+    color: #00F0FF;
+    border-left-color: #FF003C;
+  }
+
+  /* Replace the default tick with a cyberpunk marker */
+  .cp-select option::checkmark {
+    content: "▸";
+    color: #FF003C;
+    margin-inline-end: 8px;
+  }
+
+  /* Hide the browser's arrow — you already draw your own SVG */
+  .cp-select::picker-icon {
+    display: none;
+  }
+
+  /* Rotate your custom chevron while open */
+  .cp-select:open ~ svg {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}

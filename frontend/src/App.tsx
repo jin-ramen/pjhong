@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import MessageCard from './components/MessageCard'
 import FormField from './components/FormField'
 import './index.css'
+import SelectField from './components/SelectField';
 
 type Params = {
+  insult: string,
   name: string
   from: string
 }
 
 function App() {
-  const [draft, setDraft] = useState<Params>({ name: 'HONG', from: 'David Martinez' })
+  const [draft, setDraft] = useState<Params>({ insult: 'classic', name: 'HONG', from: 'David Martinez' })
   const [submitted, setSubmitted] = useState<Params | null>(null)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,10 +37,11 @@ function App() {
         className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[#FF003C] opacity-[0.08] blur-3xl"
       />
 
-      <div className="relative flex min-h-[220px] w-full max-w-md items-center justify-center">
+      <div className="relative flex min-h-55 w-full max-w-md items-center justify-center">
         {submitted ? (
           <MessageCard
             key={`${submitted.name}-${submitted.from}`}
+            insult={submitted.insult}
             name={submitted.name}
             from={submitted.from}
           />
@@ -53,6 +56,10 @@ function App() {
         onSubmit={handleSubmit}
         className="relative flex w-full max-w-md flex-col gap-4"
       >
+        <SelectField 
+          value={draft.insult}
+          onChange={(insult) => setDraft({ ...draft, insult })}
+        />
         <FormField
           label="name"
           value={draft.name}

@@ -32,7 +32,7 @@ impl FromStr for Insult {
             "classic" => Ok(Insult::Classic),
             "backoff" => Ok(Insult::BackOff),
             "happybirthday" => Ok(Insult::HappyBirthday),
-            "Blackadder" => Ok(Insult::Blackadder),
+            "blackadder" => Ok(Insult::Blackadder),
             _ => Err(ParseInsultError),
         }
     }

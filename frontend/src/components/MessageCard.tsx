@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import messageQuery from '../queries/messageQuery'
+import { messageQuery } from '../queries/messageQuery'
 import LoadingCard from './LoadingCard';
 import ErrorCard from './ErrorCard';
 
-type Props = { name: string; from: string }
+type Props = { insult: string, name: string; from: string }
 
-export default function MessageCard({ name, from }: Props) {
-  const { data, isLoading, isError, isSuccess, error, refetch } = useQuery(messageQuery(name, from))
+export default function MessageCard({ insult, name, from }: Props) {
+  const { data, isLoading, isError, isSuccess, error, refetch } = useQuery(messageQuery(insult, name, from))
 
   if (isLoading) return (
     <LoadingCard />

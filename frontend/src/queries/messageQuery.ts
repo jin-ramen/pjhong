@@ -5,16 +5,29 @@ type Message = {
   subtitle: string;
 };
 
-const getMessage = async (name: string, from: string): Promise<Message> => {
-  const response = await fetch(`api/off/${name}/${from}`);
+const getMessage = async (insult: string, name: string, from: string): Promise<Message> => {
+  const response = await fetch(`api/insult/${insult}/${name}/${from}`);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
 };
 
-export default function messageQuery(name: string, from: string) {
+export function messageQuery(insult: string, name: string, from: string) {
     return queryOptions({
-        queryKey: ["off", name, from],
-        queryFn: () => getMessage(name, from),
+        queryKey: ["insult", insult, name, from],
+        queryFn: () => getMessage(insult, name, from),
         retry: false
     })
+}
+
+const getInsults = async (): Promise<string[]> => {
+  const response = await fetch(`api/insults`);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+export function insultsQuery() {
+  return queryOptions({
+    queryKey: ["insults"],
+    queryFn: getInsults,
+  })
 }
