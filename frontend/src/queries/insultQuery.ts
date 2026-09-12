@@ -5,16 +5,16 @@ type Message = {
   subtitle: string;
 };
 
-const getMessage = async (insult: string, name: string, from: string): Promise<Message> => {
+const getInsult = async (insult: string, name: string, from: string): Promise<Message> => {
   const response = await fetch(`api/insult/${insult}?name=${name}&from=${from}`);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
 };
 
-export function messageQuery(insult: string, name: string, from: string) {
+export function insultQuery(insult: string, name: string, from: string) {
     return queryOptions({
         queryKey: ["insult", insult, name, from],
-        queryFn: () => getMessage(insult, name, from),
+        queryFn: () => getInsult(insult, name, from),
         retry: false
     })
 }
@@ -29,5 +29,19 @@ export function insultsQuery() {
   return queryOptions({
     queryKey: ["insults"],
     queryFn: getInsults,
+  })
+}
+
+const getRandomInsult = async (): Promise<string> => {
+  const response = await fetch(`api/insult/random`);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+};
+
+export function randomInsultQuery() {
+  return queryOptions({
+    queryKey: ["insult", "random"],
+    queryFn: getRandomInsult,
+    enabled: false,
   })
 }

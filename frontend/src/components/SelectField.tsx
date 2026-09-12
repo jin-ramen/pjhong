@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { insultsQuery } from "../queries/messageQuery";
+import { insultsQuery } from "../queries/insultQuery";
 
 export default function SelectField({ 
     value ,

@@ -8,9 +8,14 @@ pub async fn get_insult(
     Query(target): Query<Target>,
 ) -> Json<Message> {
     let message: Message = insult.get_insult(&target);
-    return Json(message);
+    Json(message)
 }
 
 pub async fn get_insults() -> Json<&'static [Insult]> {
     Json(Insult::VARIANTS)
+}
+
+pub async fn get_random_insult() -> Json<Insult> {
+    let insult: Insult = rand::random();
+    Json(insult)
 }

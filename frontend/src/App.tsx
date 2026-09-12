@@ -4,6 +4,7 @@ import FormField from './components/FormField'
 import './index.css'
 import SelectField from './components/SelectField';
 import DefaultCard from './components/DefaultCard';
+import RngButton from './components/RngButton';
 
 type Params = {
   insult: string,
@@ -20,9 +21,15 @@ function App() {
     setSubmitted(draft)
   }
 
+  const handleRandom = async (insult: string) => {
+    const next = { ...draft, insult }
+    setDraft(next)
+    setSubmitted(next)
+  }
+
   return (
     <main className="
-      relative flex min-h-screen flex-col items-center justify-center gap-10 overflow-hidden bg-[#0D0D0D] px-6 py-12
+      relative flex min-h-dvh flex-col items-center justify-center gap-10 overflow-hidden bg-[#0D0D0D] px-6
       py-[max(3rem,env(safe-area-inset-top))] pb-[max(3rem,env(safe-area-inset-bottom))]
     ">
       {/* Background grid */}
@@ -77,16 +84,22 @@ function App() {
           onChange={(from) => setDraft({ ...draft, from })}
         />
 
-        <button
-          type="submit"
-          className="
-            mt-2 self-end bg-[#FCEE0A] px-8 py-2.5 font-mono text-sm font-bold uppercase tracking-[0.25em] text-[#0D0D0D] 
-            transition-colors hover:bg-[#00F0FF] focus-visible:bg-[#00F0FF] focus-visible:outline-none 
-            active:bg-[#FF003C] active:text-[#FCEE0A] [clip-path:var(--chamfer-sm)]
-          "
-        >
-          Send
-        </button>
+        <div className="flex justify-end gap-8">
+          <RngButton 
+            onResult={(insult) => { handleRandom(insult) }}
+          />
+
+          <button
+            type="submit"
+            className="
+              mt-2 self-end bg-[#FCEE0A] px-8 py-2.5 font-mono text-sm font-bold uppercase tracking-[0.25em] text-[#0D0D0D] 
+              transition-colors hover:bg-[#00F0FF] focus-visible:bg-[#00F0FF] focus-visible:outline-none 
+              active:bg-[#FF003C] active:text-[#FCEE0A] [clip-path:var(--chamfer-sm)]
+            "
+          >
+            Send
+          </button>
+        </div>
       </form>
     </main>
   )

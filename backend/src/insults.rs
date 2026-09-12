@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize};
 use strum_macros::VariantArray;
+use rand::{RngExt, distr::{Distribution, StandardUniform}};
+
+use crate::insults::Insult::{BackOff, BendyBus, Blackadder, BravoMike, Chainsaw, Classic, Cocksplat, CornBread, HappyBirthday};
 
 #[derive(Serialize)]
 pub struct Message {
@@ -25,6 +28,22 @@ pub enum Insult {
     Chainsaw,
     Cocksplat,
     CornBread,
+}
+
+impl Distribution<Insult> for StandardUniform {
+    fn sample<R: RngExt + ?Sized>(&self, rng: &mut R) -> Insult {
+        match rng.random_range(0..=8) {
+            0 => Classic,
+            1 => BackOff,
+            2 => HappyBirthday,
+            3 => Blackadder,
+            4 => BravoMike,
+            5 => BendyBus,
+            6 => Chainsaw,
+            7 => Cocksplat,
+            _ => CornBread,
+        }
+    }
 }
 
 impl Insult {
